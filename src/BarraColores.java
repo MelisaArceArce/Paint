@@ -8,13 +8,15 @@ import java.util.List;
  * los colores mas comunes
  */
 class BarraColores extends JPanel {
-    private Color colorActivo;
+    static BotonColor botonActivo;
     private List<Color> colores;
+    private List<BotonColor> botones;
 
     BarraColores() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
+        botones = new ArrayList<>(13);
         colores = new ArrayList<>(13);
+
         colores.add(Color.WHITE);
         colores.add(Color.BLACK);
         colores.add(Color.GRAY);
@@ -29,12 +31,14 @@ class BarraColores extends JPanel {
         colores.add(Color.PINK);
         colores.add(Color.MAGENTA);
 
+        BotonColor boton;
         for (Color color : colores) {
-            add(new BotonColor(color, this));
+            boton = new BotonColor(color);
+            botones.add(boton);
+            add(boton);
         }
-    }
 
-    void setColorActivo(Color color) {
-        colorActivo = color;
+        botonActivo = botones.get(0);
+
     }
 }

@@ -2,13 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Paint {
-    public static void agregarComponentesPane(Container pane) {
+    private static void agregarComponentesPane(Container pane) {
         Pincel pincel = new Pincel();
         BarraColores barra = new BarraColores();
-        Lienzo lienzo = new Lienzo(pincel);
-        ControlColor control = new ControlColor();
-        control.setBarraColores(barra);
-        control.setPincel(pincel);
+        Lienzo lienzo = new Lienzo();
+
         pane.add(barra, BorderLayout.LINE_START);
         pane.add(lienzo, BorderLayout.CENTER);
     }
@@ -23,7 +21,7 @@ public class Paint {
         frame.setVisible(true);
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 crearGUI();

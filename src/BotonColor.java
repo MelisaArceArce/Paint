@@ -7,11 +7,9 @@ import java.awt.event.MouseEvent;
  * Botón de color que aparece en la barra de colores
  */
 public class BotonColor extends JButton {
-    private static BarraColores barra;
     private static SelectorColor selector;
 
-    BotonColor(Color color, BarraColores barra) {
-        BotonColor.barra = barra;
+    BotonColor(Color color) {
         setBackground(color);
 
         selector = new SelectorColor();
@@ -21,7 +19,6 @@ public class BotonColor extends JButton {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2 && !e.isConsumed()) { // Detecta si se hizo doble clic
                     e.consume();
-
                     selector.creaDialogo();
 
                     if (selector.color != null) {
@@ -29,8 +26,7 @@ public class BotonColor extends JButton {
                     }
                 } else if (e.getClickCount() == 1 && !e.isConsumed()) {
                     e.consume();
-
-                    barra.setColorActivo(color);
+                    BarraColores.botonActivo = (BotonColor) e.getSource();
                 }
             }
         };
@@ -45,5 +41,15 @@ public class BotonColor extends JButton {
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(20, 20);
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        if (BarraColores.botonActivo == this) {
+            setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        } else {
+            setBorder(new JButton().getBorder());
+        }
+        super.paintComponent(g);
     }
 }
