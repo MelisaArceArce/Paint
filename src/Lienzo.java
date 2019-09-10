@@ -1,49 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Lienzo donde se puede dibujar
  * Se encarga de ver los cambios al trazar con el mouse
  */
-
+//@TODO Crear listeners para cambiar herrActiva
 public class Lienzo extends JPanel {
-    private List<List<Point>> puntos;
+
+    private Herramienta herrActiva;
 
     Lienzo() {
-        puntos = new ArrayList<>(25);
+        herrActiva = new Pincel();
+        herrActiva.inicializar(this);
 
         setBackground(Color.white);
 
-        MouseAdapter ma = new MouseAdapter() {
-            private List<Point> caminoActual;
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-                caminoActual = new ArrayList<>(25);
-                caminoActual.add(e.getPoint());
-
-                puntos.add(caminoActual);
-            }
-
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                Point puntoArrastrado = e.getPoint();
-                caminoActual.add(puntoArrastrado);
-                repaint();
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                caminoActual = null;
-            }
-        };
-
-        addMouseListener(ma);
-        addMouseMotionListener(ma);
+        addMouseListener(herrActiva.ma);
+        addMouseMotionListener(herrActiva.ma);
     }
 
     @Override
@@ -54,16 +28,11 @@ public class Lienzo extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g.create();
+        herrActiva.setGraphics(g2d);
 
-        for (List<Point> camino : puntos) { // Dibuja líneas entre los puntos
-            Point desde = null;
-            for (Point hasta : camino) {
-                if (desde != null) {
-                    g2d.drawLine(desde.x, desde.y, hasta.x, hasta.y);
-                }
-                desde = hasta;
-            }
-        }
+        //g2d.setColor(BarraColores.botonActivo.getBackground());
+        herrActiva.dibujar();
+
         g2d.dispose();
     }
 }

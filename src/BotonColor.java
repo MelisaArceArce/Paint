@@ -17,16 +17,16 @@ public class BotonColor extends JButton {
         MouseAdapter ma = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2 && !e.isConsumed()) { // Detecta si se hizo doble clic
+                if (e.getClickCount() == 2 && !e.isConsumed()) {
                     e.consume();
                     selector.creaDialogo();
 
-                    if (selector.color != null) {
+                    if (selector.color != null) {   // Cambia el color del botón
                         setBackground(selector.color);
                     }
                 } else if (e.getClickCount() == 1 && !e.isConsumed()) {
                     e.consume();
-                    BarraColores.botonActivo = (BotonColor) e.getSource();
+                    BarraColores.botonActivo = (BotonColor) e.getSource(); // Selecciona un color
                 }
             }
         };
