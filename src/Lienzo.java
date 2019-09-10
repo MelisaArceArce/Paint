@@ -11,11 +11,9 @@ import java.util.List;
  */
 
 public class Lienzo extends JPanel {
-    private Pincel pincel;
     private List<List<Point>> puntos;
 
     Lienzo(Pincel pincel) {
-        this.pincel = pincel;
         puntos = new ArrayList<>(25);
 
         setBackground(Color.white);
@@ -56,13 +54,12 @@ public class Lienzo extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g.create();
-        pincel.setGraphics2D(g2d);
 
         for (List<Point> camino : puntos) {
             Point desde = null;
             for (Point hasta : camino) {
                 if (desde != null) {
-                    pincel.dibujaLinea(desde.x, desde.y, hasta.x, hasta.y);
+                    g2d.drawLine(desde.x, desde.y, hasta.x, hasta.y);
                 }
                 desde = hasta;
             }

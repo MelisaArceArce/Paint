@@ -1,12 +1,21 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
  * Diálogo que aparece al dar doble clic a un BotonColor
  */
-public class SelectorColor extends JColorChooser implements ActionListener {
-    private BotonColor botonPadre;
+class SelectorColor extends JColorChooser {
+    private ColorListener colorListener = new ColorListener();
+    Color color = null;
+
+    class ColorListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            color = getColor();
+        }
+    }
 
     SelectorColor() {
         VisualizadorColor vc = new VisualizadorColor();
@@ -15,24 +24,18 @@ public class SelectorColor extends JColorChooser implements ActionListener {
         getSelectionModel().addChangeListener(vc);
     }
 
-    void creaDialogo(BotonColor bn) {
-        botonPadre = bn;
-        JDialog dialogo = JColorChooser.createDialog(
-                bn,
-                "Elige color",
-                true, // Hace que no pueda seguir siendo usada la aplicación
-                this,
-                this,
-                null);
-        dialogo.setLocationRelativeTo(getParent());
-        dialogo.setVisible(true);
-    }
-
     /**
-     * Cambia de color el botón al dar clic en "Aceptar"
+     * Muestra el diálogo para seleccionar color
      */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        botonPadre.setBackground(getColor());
+    void creaDialogo() {
+        color = null;
+        JDialog dialogo = JColorChooser.createDialog(
+            this.getParent(),
+            "Elige color",
+            true, // Hace que no pueda seguir siendo usada la aplicación
+            this,
+            colorListener,
+            null);
+        dialogo.setVisible(true);
     }
 }

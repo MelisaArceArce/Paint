@@ -7,8 +7,7 @@ import java.util.List;
  * Esta paleta de color predeterminada es una columna de botones con
  * los colores mas comunes
  */
-
-public class BarraColores extends JPanel {
+class BarraColores extends JPanel {
     private Color colorActivo;
     private List<Color> colores;
 
@@ -35,7 +34,7 @@ public class BarraColores extends JPanel {
         }
     }
 
-    public void setColorActivo(Color color) {
+    void setColorActivo(Color color) {
         colorActivo = color;
     }
 }
