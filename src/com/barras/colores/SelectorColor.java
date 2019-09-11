@@ -1,10 +1,12 @@
+package com.barras.colores;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Diálogo que aparece al dar doble clic a un BotonColor
+ * Diálogo que aparece al dar doble clic a un com.barras.colores.BotonColor
  */
 class SelectorColor extends JColorChooser {
     private ColorListener colorListener = new ColorListener();

@@ -1,18 +1,19 @@
+package com.barras.colores;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Esta paleta de color predeterminada es una columna de botones con
- * los colores mas comunes
+ * Esta paleta de color es una columna de botones con los colores mas comunes
  */
-class BarraColores extends JPanel {
+public class BarraColores extends JPanel {
     static BotonColor botonActivo;
     private List<Color> colores;
     private List<BotonColor> botones;
 
-    BarraColores() {
+    public BarraColores() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         botones = new ArrayList<>(13);
         colores = new ArrayList<>(13);
@@ -39,6 +40,5 @@ class BarraColores extends JPanel {
         }
 
         botonActivo = botones.get(0);
-
     }
 }

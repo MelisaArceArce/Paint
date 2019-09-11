@@ -1,3 +1,5 @@
+package com.barras.colores;
+
 import javax.swing.*;
 import javax.swing.colorchooser.ColorSelectionModel;
 import javax.swing.event.ChangeEvent;

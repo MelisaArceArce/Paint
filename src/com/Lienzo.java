@@ -1,17 +1,22 @@
+package com;
+
+import com.barras.herramientas.BarraHerramientas;
+import com.barras.herramientas.Herramienta;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
- * Lienzo donde se puede dibujar
+ * com.Lienzo donde se puede dibujar
  * Se encarga de ver los cambios al trazar con el mouse
  */
 //@TODO Crear listeners para cambiar herrActiva
 public class Lienzo extends JPanel {
-
     private Herramienta herrActiva;
 
     Lienzo() {
-        herrActiva = new Pincel();
+        herrActiva = BarraHerramientas.herrActiva;
         herrActiva.inicializar(this);
 
         setBackground(Color.white);
@@ -30,7 +35,7 @@ public class Lienzo extends JPanel {
         Graphics2D g2d = (Graphics2D) g.create();
         herrActiva.setGraphics(g2d);
 
-        //g2d.setColor(BarraColores.botonActivo.getBackground());
+        //g2d.setColor(com.barras.colores.BarraColores.botonActivo.getBackground());
         herrActiva.dibujar();
 
         g2d.dispose();

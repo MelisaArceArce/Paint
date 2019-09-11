@@ -1,3 +1,7 @@
+package com.barras.herramientas;
+
+import com.Lienzo;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
